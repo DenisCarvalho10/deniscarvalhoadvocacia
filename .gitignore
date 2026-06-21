@@ -1,0 +1,13 @@
+# Sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+ehthumbs.db
+
+# Arquivos temporários
+*.tmp
+_preview_*.png
+
+# Deploy / dependências
+.vercel/
+node_modules/
