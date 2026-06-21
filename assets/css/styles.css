@@ -136,7 +136,7 @@ section{position:relative}
 .hero-namecard{position:absolute;left:-18px;bottom:18px;background:rgba(255,255,255,.96);color:var(--navy);border-radius:14px;padding:.85rem 1.15rem;box-shadow:var(--shadow);border-left:4px solid var(--gold);max-width:240px}
 .hero-namecard strong{display:block;font-family:var(--serif);font-size:1.05rem}
 .hero-namecard span{font-size:.78rem;color:var(--muted)}
-.hero-figure .ribbon{position:absolute;top:18px;right:-10px;background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));color:var(--navy-deep);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .85rem;border-radius:8px;box-shadow:var(--shadow)}
+.hero-figure .ribbon{position:absolute;top:-12px;right:14px;z-index:5;background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep));color:var(--navy-deep);font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .9rem;border-radius:8px;box-shadow:0 8px 20px rgba(9,29,51,.45);border:1px solid rgba(255,255,255,.35)}
 
 /* ---------- Hero visual (sem foto) ---------- */
 .hero-visual{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(201,162,75,.45);border-radius:22px;padding:2.4rem 2.2rem;box-shadow:var(--shadow-lg);backdrop-filter:blur(4px)}
