@@ -98,9 +98,9 @@ section{position:relative}
 /* ---------- Header / Nav ---------- */
 .site-header{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
 .site-header.scrolled{box-shadow:var(--shadow-sm)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:1.3rem;min-height:96px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1.3rem;min-height:84px}
 .brand{display:flex;align-items:center;gap:.7rem}
-.brand img{height:84px;width:auto;border-radius:8px}
+.brand img{height:58px;width:auto}
 .brand .brand-txt{display:flex;flex-direction:column;line-height:1.05}
 .brand .brand-name{font-family:var(--serif);font-weight:700;color:var(--navy);font-size:1.15rem}
 .brand .brand-sub{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
@@ -306,7 +306,7 @@ section{position:relative}
 .footer{background:var(--navy-deep);color:#aebccd;padding:4rem 0 0}
 .footer .grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:2.4rem;padding-bottom:3rem}
 .footer h4{color:#fff;font-family:var(--sans);font-size:.92rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
-.footer .f-brand img{height:74px;width:auto;border-radius:12px;margin-bottom:1rem;background:linear-gradient(135deg,#fbf8f1,#efe9dd);padding:8px 14px;box-shadow:var(--shadow-sm)}
+.footer .f-brand img{height:56px;width:auto;border-radius:12px;margin-bottom:1rem;background:linear-gradient(135deg,#fbf8f1,#efe9dd);padding:10px 16px;box-shadow:var(--shadow-sm)}
 .footer .f-brand p{font-size:.92rem;color:#9fb0c4}
 .footer ul{list-style:none;margin:0;padding:0}
 .footer ul li{margin-bottom:.6rem}
