@@ -11,3 +11,6 @@ _preview_*.png
 # Deploy / dependências
 .vercel/
 node_modules/
+
+# Claude Code
+skills-lock.json
