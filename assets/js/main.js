@@ -291,23 +291,62 @@
     });
   }
 
-  /* ---------- Cookie banner ---------- */
-  var cookieBanner = $("#cookieBanner");
-  var cookieAccept = $("#cookieAccept");
-  var cookieReject = $("#cookieReject");
+  /* ---------- LinkedIn Insight Tag (só após consentimento) ---------- */
+  var liLoaded = false;
+  function loadLinkedInInsight() {
+    if (liLoaded) return;
+    liLoaded = true;
+    window._linkedin_partner_id = "10882153";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push("10882153");
+    (function (l) {
+      if (!l) { window.lintrk = function (a, b) { window.lintrk.q.push([a, b]); }; window.lintrk.q = []; }
+      var s = document.getElementsByTagName("script")[0];
+      var b = document.createElement("script");
+      b.type = "text/javascript"; b.async = true;
+      b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+      s.parentNode.insertBefore(b, s);
+    })(window.lintrk);
+  }
+
+  /* ---------- Cookie banner + consentimento (LGPD) ---------- */
   var COOKIE_KEY = "dc_cookie_consent";
+  var consent = null;
+  try { consent = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+
+  // Já consentiu antes: carrega os rastreadores de imediato.
+  if (consent === "accepted") loadLinkedInInsight();
+
+  // Garante o banner em qualquer página (inclusive landing de anúncio) enquanto
+  // não houver decisão — nas páginas sem o HTML do banner, injeta um igual.
+  var cookieBanner = $("#cookieBanner");
+  if (!consent && !cookieBanner) {
+    cookieBanner = document.createElement("div");
+    cookieBanner.className = "cookie";
+    cookieBanner.id = "cookieBanner";
+    cookieBanner.innerHTML =
+      '<div class="container">' +
+      '<div class="ck-text"><strong>🍪 Este site usa cookies.</strong> Utilizamos cookies para melhorar sua experiência de navegação e analisar o tráfego. Ao continuar, você concorda com nossa <a href="privacidade.html">Política de Privacidade</a> e o uso de cookies, conforme a LGPD.</div>' +
+      '<div class="ck-actions">' +
+      '<button class="btn ck-link" id="cookieReject">Rejeitar</button>' +
+      '<button class="btn btn-gold" id="cookieAccept">Aceitar cookies</button>' +
+      '</div></div>';
+    document.body.appendChild(cookieBanner);
+  }
 
   function cookieDecision(val) {
     try { localStorage.setItem(COOKIE_KEY, val); } catch (e) {}
     if (cookieBanner) cookieBanner.classList.remove("show");
+    if (val === "accepted") loadLinkedInInsight();
   }
-  var hasConsent = false;
-  try { hasConsent = !!localStorage.getItem(COOKIE_KEY); } catch (e) {}
-  if (!hasConsent && cookieBanner) {
+
+  if (!consent && cookieBanner) {
     setTimeout(function () { cookieBanner.classList.add("show"); }, 1500);
+    var cA = cookieBanner.querySelector("#cookieAccept");
+    var cR = cookieBanner.querySelector("#cookieReject");
+    if (cA) cA.addEventListener("click", function () { cookieDecision("accepted"); });
+    if (cR) cR.addEventListener("click", function () { cookieDecision("rejected"); });
   }
-  if (cookieAccept) cookieAccept.addEventListener("click", function () { cookieDecision("accepted"); });
-  if (cookieReject) cookieReject.addEventListener("click", function () { cookieDecision("rejected"); });
 
   /* ---------- Reveal on scroll (subtle) ---------- */
   if ("IntersectionObserver" in window) {
