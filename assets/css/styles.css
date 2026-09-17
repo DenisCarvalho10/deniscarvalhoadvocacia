@@ -289,7 +289,7 @@ section{position:relative}
 .advx .container{position:relative}
 .advx-card{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:center}
 .advx-media{display:flex;justify-content:center;align-items:center}
-.advx-media img{max-width:100%;width:430px;mix-blend-mode:lighten;filter:drop-shadow(0 14px 44px rgba(0,0,0,.55))}
+.advx-media img{max-width:100%;width:480px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
 .advx-body .eyebrow{color:var(--gold-light)}
 .advx-body .eyebrow::before{background:var(--gold-light)}
 .advx-body h2{color:#fff}
