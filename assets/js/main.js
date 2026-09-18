@@ -372,8 +372,42 @@
   var consent = null;
   try { consent = localStorage.getItem(COOKIE_KEY); } catch (e) {}
 
+  /* ---------- Pixel da Meta (só após consentimento) ---------- */
+  //
+  // Mesma regra do LinkedIn Insight Tag: o Pixel NÃO entra na página antes do
+  // aceite do banner. Rastreador de terceiro carregado antes disso é tratamento
+  // de dado sem base legal (LGPD) — e foi exatamente o que fez a tag do LinkedIn
+  // ficar "Unverified" por dias: ela não existia até alguém clicar em aceitar.
+  //
+  // Difere do Google Ads DE PROPÓSITO: o gtag usa Consent Mode v2 e carrega
+  // sempre, com consentimento negado por padrão (modela a conversão sem cookie).
+  // A Meta não tem equivalente — ou o Pixel está lá, ou não está.
+  var META_PIXEL_ID = "1637180061387534";
+  var fbLoaded = false;
+  function loadMetaPixel() {
+    if (fbLoaded) return;
+    fbLoaded = true;
+    /* eslint-disable */
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n; n.loaded = true; n.version = "2.0"; n.queue = [];
+      t = b.createElement(e); t.async = true; t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    /* eslint-enable */
+    try {
+      window.fbq("init", META_PIXEL_ID);
+      window.fbq("track", "PageView");
+    } catch (e) {}
+  }
+
   // Já consentiu antes: carrega os rastreadores de imediato.
-  if (consent === "accepted") { loadLinkedInInsight(); grantAdsConsent(); }
+  if (consent === "accepted") { loadLinkedInInsight(); loadMetaPixel(); grantAdsConsent(); }
 
   // Garante o banner em qualquer página (inclusive landing de anúncio) enquanto
   // não houver decisão — nas páginas sem o HTML do banner, injeta um igual.
@@ -395,7 +429,7 @@
   function cookieDecision(val) {
     try { localStorage.setItem(COOKIE_KEY, val); } catch (e) {}
     if (cookieBanner) cookieBanner.classList.remove("show");
-    if (val === "accepted") { loadLinkedInInsight(); grantAdsConsent(); }
+    if (val === "accepted") { loadLinkedInInsight(); loadMetaPixel(); grantAdsConsent(); }
   }
 
   if (!consent && cookieBanner) {
