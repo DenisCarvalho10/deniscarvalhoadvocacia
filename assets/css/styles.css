@@ -99,8 +99,8 @@ section{position:relative}
 .site-header{position:sticky;top:0;z-index:900;background:linear-gradient(rgba(253,250,244,.25),rgba(253,250,244,.25)),url(../img/marmore.jpg?v=4) center/cover;border-bottom:1px solid rgba(201,162,75,.45);transition:box-shadow .3s}
 .site-header.scrolled{box-shadow:var(--shadow-sm)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:1.3rem;min-height:84px}
-.brand{display:flex;align-items:center;gap:.7rem}
-.brand img{height:78px;width:auto}
+.brand{display:flex;align-items:center;gap:.7rem;flex:none}
+.brand img{height:62px;width:auto;flex:none;object-fit:contain}
 .brand .brand-txt{display:flex;flex-direction:column;line-height:1.05}
 .brand .brand-name{font-family:var(--serif);font-weight:700;color:var(--navy);font-size:1.15rem}
 .brand .brand-sub{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
