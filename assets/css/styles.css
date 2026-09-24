@@ -256,7 +256,14 @@ section{position:relative}
 .post .thumb.g2{background:linear-gradient(140deg,#0E2A47,#2a7d7d)}
 .post .thumb.g3{background:linear-gradient(140deg,#13355a,#A9822F)}
 .post .thumb svg{width:60px;height:60px;color:rgba(255,255,255,.35)}
-.post .cat{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--navy-deep);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.32rem .7rem;border-radius:6px}
+.post .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.post:hover .thumb img{transform:scale(1.05)}
+/* Capa do artigo (banco de imagens) */
+.article-cover{max-width:900px;margin:-1.6rem auto 0;padding:0 1.5rem}
+.article-cover figure{margin:0}
+.article-cover img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;box-shadow:0 20px 55px rgba(0,0,0,.28);display:block}
+.article-cover figcaption{font-size:.72rem;color:var(--muted);text-align:right;margin-top:.5rem}
+.post .cat{position:absolute;top:12px;left:12px;z-index:2;background:var(--gold);color:var(--navy-deep);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.32rem .7rem;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .post .body{padding:1.5rem;display:flex;flex-direction:column;flex:1}
 .post .date{font-size:.78rem;color:var(--muted);margin-bottom:.5rem}
 .post h3{font-size:1.18rem;margin-bottom:.5rem}
