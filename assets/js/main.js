@@ -360,6 +360,7 @@
   })();
   gtag("js", new Date());
   gtag("config", "AW-18451711790");
+  gtag("config", "G-THFK2MPCCF"); // Google Analytics 4 (Consent Mode v2: só mede com cookie após o aceite)
   function grantAdsConsent() {
     gtag("consent", "update", {
       ad_storage: "granted", ad_user_data: "granted",
