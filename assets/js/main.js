@@ -311,8 +311,8 @@
 
   if (leadinTab) leadinTab.addEventListener("click", openLead);
   if (leadinClose) leadinClose.addEventListener("click", closeLead);
-  var EBOOK_PDF = "assets/guia-7-direitos-saude.pdf";
-  var EBOOK_NAME = "Guia-7-Direitos-Saude-Denis-Carvalho.pdf";
+  var EBOOK_PDF = "assets/guia-seguranca-juridica-saude.pdf";
+  var EBOOK_NAME = "Guia-Seguranca-Juridica-na-Saude-Denis-Carvalho.pdf";
   var LEAD_ENDPOINT = "https://www.vivjus.com.br/api/lead-site";
   function baixarEbook() {
     var a = document.createElement("a");
@@ -323,7 +323,7 @@
   function enviarLeadVivjus(nome, email, hp) {
     try {
       var dados = { nome: nome, email: email, website: hp || "",
-        origem: "E-book: 7 Direitos na Saude (site institucional)" };
+        origem: "E-book: Seguranca Juridica na Saude (site institucional)" };
       var a = window.ADVX_ATTRIB || {};
       ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "landing_page", "referrer", "fbclid", "gclid"]
         .forEach(function (k) { if (a[k]) dados[k] = a[k]; });
