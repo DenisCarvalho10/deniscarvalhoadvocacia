@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=20260920e">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261010">
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -519,14 +519,24 @@
 <div class="leadin" id="leadin">
   <div class="leadin-card">
     <button class="close" id="leadinClose" aria-label="Fechar">×</button>
-    <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> Material gratuito</span>
-    <h4>Guia: 7 direitos que todo paciente e profissional da saúde precisa conhecer</h4>
-    <p>Baixe gratuitamente e receba conteúdos exclusivos sobre Direito Médico. Sem spam.</p>
+    <div class="leadin-head">
+      <img src="assets/img/ebook-cover.jpg?v=1" alt="Capa do e-book: 7 Direitos na Saúde" class="leadin-cover" loading="lazy">
+      <div>
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> E-book gratuito</span>
+        <h4>7 Direitos que todo paciente e profissional da saúde precisa conhecer</h4>
+      </div>
+    </div>
+    <ul class="leadin-benefits">
+      <li>7 direitos essenciais, explicados de forma simples</li>
+      <li>Dicas práticas para aplicar no seu caso</li>
+      <li>Roteiro do que fazer diante de um problema</li>
+    </ul>
     <form id="leadForm">
       <input type="text" id="leadNome" placeholder="Seu nome" required>
       <input type="email" id="leadEmail" placeholder="Seu melhor e-mail" required>
-      <button type="submit" class="btn btn-gold btn-block">Quero o e-book grátis</button>
+      <button type="submit" class="btn btn-gold btn-block">Baixar o e-book grátis</button>
     </form>
+    <p class="leadin-mini">PDF · 11 páginas · download imediato · sem spam</p>
   </div>
 </div>
 
@@ -557,7 +567,7 @@
 <!-- ============ TOAST ============ -->
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg">Tudo certo!</span></div>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=20261010"></script>
 <!-- ============ AGENDA — CALENDÁRIO DE AGENDAMENTO ============ -->
 <script>
 (function(){

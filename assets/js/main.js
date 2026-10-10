@@ -311,17 +311,30 @@
 
   if (leadinTab) leadinTab.addEventListener("click", openLead);
   if (leadinClose) leadinClose.addEventListener("click", closeLead);
+  var EBOOK_PDF = "assets/guia-7-direitos-saude.pdf";
+  var EBOOK_NAME = "Guia-7-Direitos-Saude-Denis-Carvalho.pdf";
+  function baixarEbook() {
+    var a = document.createElement("a");
+    a.href = EBOOK_PDF; a.download = EBOOK_NAME; a.target = "_blank"; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
   if (leadForm) {
     leadForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var nome = $("#leadNome").value.trim();
-      var email = $("#leadEmail").value.trim();
-      // Sem backend: registra intenção e direciona ao WhatsApp para envio do material
-      var texto = "Olá! Sou " + nome + " (" + email + ") e gostaria de receber o e-book gratuito sobre Direito Médico.";
-      window.open(wa(texto), "_blank");
-      showToast("Perfeito, " + nome.split(" ")[0] + "! Vamos te enviar o material.");
-      leadForm.reset();
-      closeLead();
+      var first = (nome.split(" ")[0] || nome);
+      // Entrega imediata: dispara o download do e-book (PDF no próprio site)
+      baixarEbook();
+      // Rastreamento de conversão (se os pixels estiverem carregados)
+      try { if (window.fbq) fbq("track", "Lead", { content_name: "Ebook 7 Direitos na Saude" }); } catch (e2) {}
+      try { if (window.gtag) gtag("event", "generate_lead", { event_category: "ebook", event_label: "7 direitos" }); } catch (e3) {}
+      showToast("Pronto, " + first + "! Seu e-book está sendo baixado.");
+      // Estado de sucesso, com link de download manual (caso o navegador bloqueie)
+      leadForm.outerHTML =
+        '<div class="lead-ok"><div class="ok-ic">&#10003;</div>' +
+        '<b>E-book liberado, ' + first + '!</b>' +
+        '<p>O download começou automaticamente. Se não abrir, use o link abaixo.</p>' +
+        '<a class="redl" href="' + EBOOK_PDF + '" download="' + EBOOK_NAME + '" target="_blank" rel="noopener">&#128229; Baixar o e-book novamente</a></div>';
     });
   }
 
