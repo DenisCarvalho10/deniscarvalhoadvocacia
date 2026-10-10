@@ -313,17 +313,42 @@
   if (leadinClose) leadinClose.addEventListener("click", closeLead);
   var EBOOK_PDF = "assets/guia-7-direitos-saude.pdf";
   var EBOOK_NAME = "Guia-7-Direitos-Saude-Denis-Carvalho.pdf";
+  var LEAD_ENDPOINT = "https://www.vivjus.com.br/api/lead-site";
   function baixarEbook() {
     var a = document.createElement("a");
     a.href = EBOOK_PDF; a.download = EBOOK_NAME; a.target = "_blank"; a.rel = "noopener";
     document.body.appendChild(a); a.click(); a.remove();
   }
+  // Encaminha o lead ao ViviJus.IA (CRM), com a atribuição de origem (UTM).
+  function enviarLeadVivjus(nome, email, hp) {
+    try {
+      var dados = { nome: nome, email: email, website: hp || "",
+        origem: "E-book: 7 Direitos na Saude (site institucional)" };
+      var a = window.ADVX_ATTRIB || {};
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "landing_page", "referrer", "fbclid", "gclid"]
+        .forEach(function (k) { if (a[k]) dados[k] = a[k]; });
+      if (!dados.landing_page) dados.landing_page = location.href.split("#")[0];
+      if (!dados.referrer && document.referrer) dados.referrer = document.referrer;
+      // content-type text/plain evita o preflight CORS; keepalive garante o envio durante o download
+      fetch(LEAD_ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "text/plain;charset=UTF-8" },
+        body: JSON.stringify(dados),
+        keepalive: true,
+        mode: "cors",
+      }).catch(function () {});
+    } catch (e) {}
+  }
   if (leadForm) {
     leadForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var nome = $("#leadNome").value.trim();
+      var email = ($("#leadEmail").value || "").trim();
+      var hp = (document.getElementById("leadWebsite") || {}).value || "";
       var first = (nome.split(" ")[0] || nome);
-      // Entrega imediata: dispara o download do e-book (PDF no próprio site)
+      // 1) Encaminha o lead ao CRM do ViviJus.IA (não bloqueia a entrega)
+      enviarLeadVivjus(nome, email, hp);
+      // 2) Entrega imediata: dispara o download do e-book (PDF no próprio site)
       baixarEbook();
       // Rastreamento de conversão (se os pixels estiverem carregados)
       try { if (window.fbq) fbq("track", "Lead", { content_name: "Ebook 7 Direitos na Saude" }); } catch (e2) {}
